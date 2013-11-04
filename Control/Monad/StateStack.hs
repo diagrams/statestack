@@ -55,7 +55,6 @@ module Control.Monad.StateStack
 
        ) where
 
-import Control.Newtype
 import Data.Monoid
 import Control.Applicative
 import Control.Arrow (second)
@@ -91,10 +90,6 @@ import qualified Control.Monad.IO.Class as IC
 newtype StateStackT s m a = StateStackT { unStateStackT :: St.StateT (s,[s]) m a }
   deriving (Functor, Applicative, Monad, MonadTrans, IC.MonadIO)
 
-instance Newtype (StateStackT s m a) (St.StateT (s,[s]) m a) where
-  pack   = StateStackT
-  unpack = unStateStackT
-
 -- | Class of monads which support a state along with a stack for
 --   saving and restoring states.
 class St.MonadState s m => MonadStateStack s m where
@@ -102,12 +97,12 @@ class St.MonadState s m => MonadStateStack s m where
   restore :: m ()   -- ^ Restore the top state from the stack
 
 instance Monad m => St.MonadState s (StateStackT s m) where
-  get   = pack $ St.gets fst
-  put s = pack $ (St.modify . first) (const s)
+  get   = StateStackT $ St.gets fst
+  put s = StateStackT $ (St.modify . first) (const s)
 
 instance Monad m => MonadStateStack s (StateStackT s m) where
-  save = pack $ St.modify (fst &&& uncurry (:))
-  restore = pack . St.modify $ \(cur,hist) ->
+  save    = StateStackT $ St.modify (fst &&& uncurry (:))
+  restore = StateStackT . St.modify $ \(cur,hist) ->
               case hist of
                 []        -> (cur,hist)
                 (r:hist') -> (r,hist')
@@ -116,7 +111,7 @@ instance Monad m => MonadStateStack s (StateStackT s m) where
 --   in a computation of the underlying monad which yields the return
 --   value and final state.
 runStateStackT :: Monad m => StateStackT s m a -> s -> m (a, s)
-runStateStackT m s = (liftM . second) fst . flip St.runStateT (s,[]) . unpack $ m
+runStateStackT m s = (liftM . second) fst . flip St.runStateT (s,[]) . unStateStackT $ m
 
 -- | Like 'runStateStackT', but discard the final state.
 evalStateStackT :: Monad m => StateStackT s m a -> s -> m a
@@ -146,7 +141,7 @@ execStateStack m s = runIdentity $ execStateStackT m s
 -- | @StateT@ computations can always be lifted to @StateStackT@
 --   computations which do not manipulate the state stack.
 liftState :: Monad m => St.StateT s m a -> StateStackT s m a
-liftState st = pack . St.StateT $ \(s,ss) -> (liftM . second) (flip (,) ss) (St.runStateT st s)
+liftState st = StateStackT . St.StateT $ \(s,ss) -> (liftM . second) (flip (,) ss) (St.runStateT st s)
 
 ------------------------------------------------------------
 --  Applying monad transformers to MonadStateStack monads
@@ -197,14 +192,14 @@ instance (Monoid w, MonadStateStack s m) => MonadStateStack s (Strict.WriterT w 
 ------------------------------------------------------------
 
 instance CC.MonadCont m => CC.MonadCont (StateStackT s m) where
-  callCC c = pack $ CC.callCC (unpack . (\k -> c (pack . k)))
+  callCC c = StateStackT $ CC.callCC (unStateStackT . (\k -> c (StateStackT . k)))
 
 {-  -- These require UndecidableInstances =(
 instance EC.MonadError e m => EC.MonadError e (StateStackT s m) where
   throwError     = lift . EC.throwError
-  catchError m h = pack $ EC.catchError (unpack m) (unpack . h)
+  catchError m h = StateStackT $ EC.catchError (unStateStackT m) (unStateStackT . h)
 
 instance RC.MonadReader r m => RC.MonadReader r (StateStackT s m) where
   ask     = lift RC.ask
-  local f = pack . RC.local f . unpack
+  local f = StateStackT . RC.local f . unStateStackT
 -}

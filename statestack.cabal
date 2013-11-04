@@ -21,5 +21,4 @@ Library
   Exposed-modules:     Control.Monad.StateStack
   Build-depends:       base >= 4.2 && < 4.8,
                        mtl >= 2.1 && < 2.2,
-                       transformers >= 0.3 && < 0.4,
-                       lens >= 3.8 && < 3.11
+                       transformers >= 0.3 && < 0.4
