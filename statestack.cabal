@@ -20,5 +20,5 @@ Library
   Default-language:    Haskell2010
   Exposed-modules:     Control.Monad.StateStack
   Build-depends:       base >= 4.2 && < 4.8,
-                       mtl >= 2.1 && < 2.2,
-                       transformers >= 0.3 && < 0.4
+                       mtl >= 2.1 && < 2.3,
+                       transformers >= 0.3 && < 0.5
