@@ -1,4 +1,5 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving
+{-# LANGUAGE CPP
+           , GeneralizedNewtypeDeriving
            , FlexibleInstances
            , MultiParamTypeClasses
   #-}
@@ -64,7 +65,11 @@ import Control.Arrow (first, (&&&))
 
 import Control.Monad.Trans
 import Control.Monad.Trans.Cont
+#if MIN_VERSION_transformers(0,4,0)
+import Control.Monad.Trans.Except
+#else
 import Control.Monad.Trans.Error
+#endif
 import Control.Monad.Trans.Identity
 import Control.Monad.Trans.List
 import Control.Monad.Trans.Maybe
@@ -151,7 +156,11 @@ instance MonadStateStack s m => MonadStateStack s (ContT r m) where
   save    = lift save
   restore = lift restore
 
+#if MIN_VERSION_transformers(0,4,0)
+instance MonadStateStack s m => MonadStateStack s (ExceptT e m) where
+#else
 instance (Error e, MonadStateStack s m) => MonadStateStack s (ErrorT e m) where
+#endif
   save    = lift save
   restore = lift restore
 
