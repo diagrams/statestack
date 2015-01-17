@@ -1,4 +1,5 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving
+{-# LANGUAGE CPP
+           , GeneralizedNewtypeDeriving
            , FlexibleInstances
            , MultiParamTypeClasses
   #-}
@@ -203,3 +204,14 @@ instance RC.MonadReader r m => RC.MonadReader r (StateStackT s m) where
   ask     = lift RC.ask
   local f = StateStackT . RC.local f . unStateStackT
 -}
+
+------------------------------------------------------------
+--  MonadState instance for ExceptT for older mtl versions
+------------------------------------------------------------
+
+#if !(MIN_VERSION_mtl(2,2,0))
+instance St.MonadState s m => St.MonadState s (ExceptT e m) where
+    get   = lift get
+    put   = lift . put
+    state = lift . state
+#endif
