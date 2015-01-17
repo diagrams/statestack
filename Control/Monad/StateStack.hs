@@ -64,7 +64,7 @@ import Control.Arrow (first, (&&&))
 
 import Control.Monad.Trans
 import Control.Monad.Trans.Cont
-import Control.Monad.Trans.Error
+import Control.Monad.Trans.Except
 import Control.Monad.Trans.Identity
 import Control.Monad.Trans.List
 import Control.Monad.Trans.Maybe
@@ -151,7 +151,7 @@ instance MonadStateStack s m => MonadStateStack s (ContT r m) where
   save    = lift save
   restore = lift restore
 
-instance (Error e, MonadStateStack s m) => MonadStateStack s (ErrorT e m) where
+instance MonadStateStack s m => MonadStateStack s (ExceptT e m) where
   save    = lift save
   restore = lift restore
 
