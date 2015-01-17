@@ -211,7 +211,7 @@ instance RC.MonadReader r m => RC.MonadReader r (StateStackT s m) where
 
 #if !(MIN_VERSION_mtl(2,2,0))
 instance St.MonadState s m => St.MonadState s (ExceptT e m) where
-    get   = lift get
-    put   = lift . put
-    state = lift . state
+    get   = lift StC.get
+    put   = lift . StC.put
+    state = lift . StC.state
 #endif
