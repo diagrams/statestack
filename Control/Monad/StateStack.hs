@@ -3,6 +3,9 @@
            , FlexibleInstances
            , MultiParamTypeClasses
   #-}
+#if !(MIN_VERSION_mtl(2,2,0))
+{-# LANGUAGE UndecidableInstances #-}
+#endif
 
 -----------------------------------------------------------------------------
 -- |
