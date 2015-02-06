@@ -1,12 +1,7 @@
-{-# LANGUAGE CPP
-           , GeneralizedNewtypeDeriving
+{-# LANGUAGE GeneralizedNewtypeDeriving
            , FlexibleInstances
            , MultiParamTypeClasses
   #-}
-#if !(MIN_VERSION_mtl(2,2,0))
-{-# LANGUAGE UndecidableInstances #-}
-{-# OPTIONS_GHC -fno-warn-orphans #-}
-#endif
 
 -----------------------------------------------------------------------------
 -- |
@@ -63,6 +58,7 @@ module Control.Monad.StateStack
 import Data.Monoid
 import Control.Applicative
 import Control.Arrow (second)
+import Control.Monad.Except ()
 import Control.Monad.Identity
 import qualified Control.Monad.State as St
 import Control.Arrow (first, (&&&))
@@ -208,14 +204,3 @@ instance RC.MonadReader r m => RC.MonadReader r (StateStackT s m) where
   ask     = lift RC.ask
   local f = StateStackT . RC.local f . unStateStackT
 -}
-
-------------------------------------------------------------
---  MonadState instance for ExceptT for older mtl versions
-------------------------------------------------------------
-
-#if !(MIN_VERSION_mtl(2,2,0))
-instance St.MonadState s m => St.MonadState s (ExceptT e m) where
-    get   = lift StC.get
-    put   = lift . StC.put
-    state = lift . StC.state
-#endif
