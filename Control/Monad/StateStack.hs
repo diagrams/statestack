@@ -58,7 +58,6 @@ module Control.Monad.StateStack
 import Data.Monoid
 import Control.Applicative
 import Control.Arrow (second)
-import Control.Monad.Except ()
 import Control.Monad.Identity
 import qualified Control.Monad.State as St
 import Control.Arrow (first, (&&&))
