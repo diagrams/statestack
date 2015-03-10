@@ -1,6 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving
            , FlexibleInstances
            , MultiParamTypeClasses
+           , CPP
   #-}
 
 -----------------------------------------------------------------------------
@@ -55,8 +56,10 @@ module Control.Monad.StateStack
 
        ) where
 
+#if __GLASGOW_HASKELL__ < 710
 import Data.Monoid
 import Control.Applicative
+#endif
 import Control.Arrow (second)
 import Control.Monad.Identity
 import qualified Control.Monad.State as St
