@@ -1,5 +1,5 @@
-0.2.0.4 (17 Jan 2015)
-----------------------
+0.2.0.4 (19 April 2015)
+-----------------------
 
   - Use `transformers-compat` to suppress deprecation warnings.
 
