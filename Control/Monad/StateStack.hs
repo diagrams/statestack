@@ -78,9 +78,6 @@ import Control.Monad.Trans.Writer.Lazy as Lazy
 import Control.Monad.Trans.Writer.Strict as Strict
 
 import qualified Control.Monad.Cont.Class as CC
--- import qualified Control.Monad.Error.Class as EC
-import qualified Control.Monad.State.Class as StC
--- import qualified Control.Monad.Reader.Class as RC
 import qualified Control.Monad.IO.Class as IC
 
 
