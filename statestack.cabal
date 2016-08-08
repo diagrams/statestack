@@ -12,6 +12,7 @@ Category:            Control
 Build-type:          Simple
 Cabal-version:       >=1.10
 Bug-reports:         http://github.com/diagrams/statestack/issues
+Tested-with:         GHC == 7.6.3, GHC == 7.8.4, GHC == 7.10.2, GHC == 8.0.1
 Source-repository head
   type: git
   location: git://github.com/diagrams/statestack
