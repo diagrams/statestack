@@ -7,7 +7,7 @@ License:             BSD3
 License-file:        LICENSE
 Extra-source-files:  CHANGES.md
 Author:              Brent Yorgey
-Maintainer:          byorgey@cis.upenn.edu
+Maintainer:          byorgey@gmail.com
 Category:            Control
 Build-type:          Simple
 Cabal-version:       >=1.10
