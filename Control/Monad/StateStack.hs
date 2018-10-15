@@ -1,8 +1,7 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving
-           , FlexibleInstances
-           , MultiParamTypeClasses
-           , CPP
-  #-}
+{-# LANGUAGE CPP                        #-}
+{-# LANGUAGE FlexibleInstances          #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
 
 -----------------------------------------------------------------------------
 -- |
