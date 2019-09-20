@@ -57,13 +57,13 @@ module Control.Monad.StateStack
 
 #if __GLASGOW_HASKELL__ < 710
 import           Control.Applicative
-import           Control.Monad.Identity
 import           Data.Monoid
 #endif
 import           Control.Arrow                     (second)
 import           Control.Arrow                     (first, (&&&))
 import qualified Control.Monad.State               as St
 
+import           Control.Monad.Identity
 import           Control.Monad.Trans
 import           Control.Monad.Trans.Cont
 import           Control.Monad.Trans.Except
