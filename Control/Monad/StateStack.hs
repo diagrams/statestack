@@ -67,8 +67,6 @@ import           Control.Monad.Identity
 import           Control.Monad.Trans
 import           Control.Monad.Trans.Cont
 import           Control.Monad.Trans.Except
-import           Control.Monad.Trans.Identity
-import           Control.Monad.Trans.List
 import           Control.Monad.Trans.Maybe
 import           Control.Monad.Trans.Reader        (ReaderT)
 import           Control.Monad.Trans.State.Lazy    as Lazy
@@ -155,10 +153,6 @@ instance MonadStateStack s m => MonadStateStack s (ExceptT e m) where
   restore = lift restore
 
 instance MonadStateStack s m => MonadStateStack s (IdentityT m) where
-  save    = lift save
-  restore = lift restore
-
-instance MonadStateStack s m => MonadStateStack s (ListT m) where
   save    = lift save
   restore = lift restore
 
