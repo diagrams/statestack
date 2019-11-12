@@ -55,10 +55,6 @@ module Control.Monad.StateStack
 
        ) where
 
-#if __GLASGOW_HASKELL__ < 710
-import           Control.Applicative
-import           Data.Monoid
-#endif
 import           Control.Arrow                     (second)
 import           Control.Arrow                     (first, (&&&))
 import qualified Control.Monad.State               as St
