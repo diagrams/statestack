@@ -1,3 +1,10 @@
+0.3 (13 November 2019)
+----------------------
+
+  - Now builds with with GHC 7.10 through 8.8
+  - Drop support for GHC < 7.10
+  - Remove deprecated `ListT` instance
+
 0.2.0.5-r2 (2 April 2018)
 -------------------------
 
