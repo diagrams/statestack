@@ -1,3 +1,9 @@
+0.3-r2 (28 Dec 2021)
+--------------------
+
+  - Allow `base-4.16`, `transformers-0.6`, `transformers-compat-0.7`
+  - Test with GHC through 9.2
+
 0.3-r1 (28 May 2021)
 --------------------
 
