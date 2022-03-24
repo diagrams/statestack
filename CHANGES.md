@@ -1,3 +1,9 @@
+0.3.1 (24 March 2022)
+---------------------
+
+  - Remove support for `transformers-0.3`
+  - Remove dependency on `transformers-compat`
+
 0.3-r2 (28 Dec 2021)
 --------------------
 
