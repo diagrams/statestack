@@ -59,6 +59,7 @@ import           Control.Arrow                     (second)
 import           Control.Arrow                     (first, (&&&))
 import qualified Control.Monad.State               as St
 
+import           Control.Monad
 import           Control.Monad.Identity
 import           Control.Monad.Trans
 import           Control.Monad.Trans.Cont
