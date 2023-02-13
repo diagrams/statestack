@@ -1,4 +1,4 @@
-0.3.1-r2 (13 Feb 2023)
+0.3.1.1 (13 Feb 2023)
 ----------------------
 
   - Allow `mtl-2.3` (thanks to @FinleyMcIlwaine)
